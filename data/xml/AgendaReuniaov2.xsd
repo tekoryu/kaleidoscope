@@ -1,0 +1,862 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="AgendaReuniao">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Metadados"/>
+        <xs:element ref="reunioes"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DataDepreciacao" type="xs:string"/>
+  <xs:element name="DataDesativacaoCompleta" type="xs:string"/>
+  <xs:element name="DataVersaoServico" type="xs:string"/>
+  <xs:element name="Descontinuacao">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="DataDepreciacao" minOccurs="0"/>
+        <xs:element ref="DataDesativacaoCompleta" minOccurs="0"/>
+        <xs:element ref="UrlServicoSubstituto" minOccurs="0"/>
+        <xs:element ref="VersaoServicoSubstituto" minOccurs="0"/>
+        <xs:element ref="UrlDocServicoSubstituto" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DescricaoDataSet" type="xs:string"/>
+  <xs:element name="Metadados">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Versao" minOccurs="0"/>
+        <xs:element ref="VersaoServico" minOccurs="0"/>
+        <xs:element ref="DataVersaoServico" minOccurs="0"/>
+        <xs:element ref="Descontinuacao" minOccurs="0"/>
+        <xs:element ref="DescricaoDataSet" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="listaArquivosPortal" type="listaArquivosPortal"/>
+  <xs:element name="listaDocumentosDiversosPortal" type="listaDocumentosDiversosPortal"/>
+  <xs:element name="listaPastasPortal" type="listaPastasPortal"/>
+  <xs:element name="reuniao" type="reuniaoTO"/>
+  <xs:element name="reunioes" type="listaReuniao"/>
+  <xs:element name="votacoes" type="listaDeVotacoesDTO"/>
+  <xs:complexType name="situacaoMateriaTO">
+    <xs:sequence>
+      <xs:element name="codigoTipoResultado" type="xs:int" minOccurs="0"/>
+      <xs:element name="descricaoTipoResultado" type="xs:string" minOccurs="0"/>
+      <xs:element name="isSuspensoAguardandoReinicioDeReuniao" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="domaTO">
+    <xs:sequence>
+      <xs:element name="idDoma" type="xs:long" minOccurs="0"/>
+      <xs:element name="idProcesso" type="xs:long" minOccurs="0"/>
+      <xs:element name="autoria" type="xs:string" minOccurs="0"/>
+      <xs:element name="idTipoDoma" type="xs:long" minOccurs="0"/>
+      <xs:element name="numeroSedol" type="xs:string" minOccurs="0"/>
+      <xs:element name="objetivoCasa" type="xs:int" minOccurs="0"/>
+      <xs:element name="objetivoCasaDescricao" type="xs:string" minOccurs="0"/>
+      <xs:element name="descricaoTipoDoma" type="xs:string" minOccurs="0"/>
+      <xs:element name="siglaTipoDoma" type="xs:string" minOccurs="0"/>
+      <xs:element name="ementa" type="xs:string" minOccurs="0"/>
+      <xs:element name="dataFecho" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dataApresentacao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="sigla" type="xs:string" minOccurs="0"/>
+      <xs:element name="numero" type="xs:string" minOccurs="0"/>
+      <xs:element name="ano" type="xs:int" minOccurs="0"/>
+      <xs:element name="identificacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="identificacaoPorExtenso" type="xs:string" minOccurs="0"/>
+      <xs:element name="apelido" type="xs:string" minOccurs="0"/>
+      <xs:element name="idConteudoInformacional" type="xs:long" minOccurs="0"/>
+      <xs:element name="codigoMateria" type="xs:long" minOccurs="0"/>
+      <xs:element name="explicacaoEmenta" type="xs:string" minOccurs="0"/>
+      <xs:element name="siglaPorExtenso" type="xs:string" minOccurs="0"/>
+      <xs:element name="complementar" type="xs:boolean"/>
+      <xs:element name="consolidacao" type="xs:boolean"/>
+      <xs:element name="proposicao" type="xs:boolean"/>
+      <xs:element name="identificado" type="xs:boolean"/>
+      <xs:element name="textos" type="textoMateria" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="anexados" type="domaTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="autorias" type="autoriaMateriaDTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="relatorias" nillable="true" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="codigoColegiado" type="xs:long" minOccurs="0"/>
+            <xs:element name="siglaColegiado" type="xs:string" minOccurs="0"/>
+            <xs:element name="relator" type="relatoriaTO" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="relatorAdhoc" type="relatoriaTO" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="autoriaMateriaDTO">
+    <xs:sequence>
+      <xs:element name="ordem" type="xs:int" minOccurs="0"/>
+      <xs:element name="siglaTipo" type="xs:string" minOccurs="0"/>
+      <xs:element name="descricaoTipo" type="xs:string" minOccurs="0"/>
+      <xs:element name="isAutoriaComOutros" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="nome" type="xs:string" minOccurs="0"/>
+      <xs:element name="tratamento" type="xs:string" minOccurs="0"/>
+      <xs:element name="colegiado" type="colegiadoTO" minOccurs="0"/>
+      <xs:element name="parlamentar" type="parlamentarDTO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="textoMateria">
+    <xs:sequence>
+      <xs:element name="ordemNaPauta" type="xs:int" minOccurs="0"/>
+      <xs:element name="idDoma" type="xs:long" minOccurs="0"/>
+      <xs:element name="idProcesso" type="xs:long" minOccurs="0"/>
+      <xs:element name="identificacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="identificacaoParecer" type="xs:string" minOccurs="0"/>
+      <xs:element name="descricaoTipoDoma" type="xs:string" minOccurs="0"/>
+      <xs:element name="siglaTipoDoma" type="xs:string" minOccurs="0"/>
+      <xs:element name="dataAtualizacao" type="xs:date" minOccurs="0"/>
+      <xs:element name="codigoColegiado" type="xs:long" minOccurs="0"/>
+      <xs:element name="siglaColegiado" type="xs:string" minOccurs="0"/>
+      <xs:element name="conteudoInformacional" type="xs:string" minOccurs="0"/>
+      <xs:element name="urlDownload" type="xs:string" minOccurs="0"/>
+      <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="autor">
+    <xs:sequence>
+      <xs:element name="nomeAutoria" type="xs:string" minOccurs="0"/>
+      <xs:element name="isParlamentar" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="isColegiado" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="possuiOutrosAutores" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="tipoAutoriaDomaSigla" type="xs:string" minOccurs="0"/>
+      <xs:element name="tipoAutoriaDomaDescricao" type="xs:string" minOccurs="0"/>
+      <xs:element name="colegiado" type="colegiadoTO" minOccurs="0"/>
+      <xs:element name="parlamentar" type="parlamentarTO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="relatoriaTO">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="idProcesso" type="xs:long" minOccurs="0"/>
+      <xs:element name="parlamentar" type="parlamentarDTO" minOccurs="0"/>
+      <xs:element name="dataDesignacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="dataEncerramento" type="xs:string" minOccurs="0"/>
+      <xs:element name="plenario" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="idRelatoriaOriginal" type="xs:int" minOccurs="0"/>
+      <xs:element name="idRelatoriaAdhoc" type="xs:int" minOccurs="0"/>
+      <xs:element name="idTipo" type="xs:int" minOccurs="0"/>
+      <xs:element name="descricaoTipo" type="xs:string" minOccurs="0"/>
+      <xs:element name="descricaoTipoRelator" type="xs:string" minOccurs="0"/>
+      <xs:element name="casaLegislativa" type="xs:string" minOccurs="0"/>
+      <xs:element name="aberta" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="encerrada" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="relatorAdhoc" type="xs:string" minOccurs="0"/>
+      <xs:element name="relator" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="adhoc" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="revisor" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="idTipoEncerramento" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="classificacao">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long"/>
+      <xs:element name="descricao" type="xs:string"/>
+      <xs:element name="codigoTipoMateriaNaoAutonoma" type="xs:int" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="parlamentarDTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="nome" type="xs:string" minOccurs="0"/>
+      <xs:element name="nomeParlamentar" type="xs:string" minOccurs="0"/>
+      <xs:element name="sexo" type="xs:string" minOccurs="0"/>
+      <xs:element name="cargo" type="xs:string" minOccurs="0"/>
+      <xs:element name="nomeComCargo" type="xs:string" minOccurs="0"/>
+      <xs:element name="nomeComCargoResumido" type="xs:string" minOccurs="0"/>
+      <xs:element name="casa" type="xs:string" minOccurs="0"/>
+      <xs:element name="ufPartido" type="xs:string" minOccurs="0"/>
+      <xs:element name="siglaPartido" type="xs:string" minOccurs="0"/>
+      <xs:element name="partido" type="xs:string" minOccurs="0"/>
+      <xs:element name="codigoDeputado" type="xs:long" minOccurs="0"/>
+      <xs:element name="urlFoto" type="xs:string" minOccurs="0"/>
+      <xs:element name="urlPagina" type="xs:string" minOccurs="0"/>
+      <xs:element name="isSenador" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="isDeputado" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="data" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="liderancas" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="titulo" type="xs:string" minOccurs="0"/>
+                <xs:element name="nomeUnidadeLideranca" type="xs:string" minOccurs="0"/>
+                <xs:element name="siglaPartido" type="xs:string" minOccurs="0"/>
+                <xs:element name="nomePartido" type="xs:string" minOccurs="0"/>
+                <xs:element name="bloco" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="parlamentarTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="nome" type="xs:string" minOccurs="0"/>
+      <xs:element name="sexo" type="xs:string" minOccurs="0"/>
+      <xs:element name="isDeputado" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="isSenador" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="partidoSigla" type="xs:string" minOccurs="0"/>
+      <xs:element name="uf" type="xs:string" minOccurs="0"/>
+      <xs:element name="urlFoto" type="xs:string" minOccurs="0"/>
+      <xs:element name="urlPagina" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dataReuniaoDto">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="dataReuniao" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dataEvento" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="codigoSituacao" type="xs:long" minOccurs="0"/>
+      <xs:element name="descricaoSituacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="realizada" type="xs:boolean"/>
+      <xs:element name="motivo" type="xs:string" minOccurs="0"/>
+      <xs:element name="observacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="rotuloDivulgacao" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="infoItemPautaEmDeliberacao">
+    <xs:sequence>
+      <xs:element name="codigoDoItem" type="xs:long" minOccurs="0"/>
+      <xs:element name="ordem" type="xs:int" minOccurs="0"/>
+      <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+      <xs:element name="isTerminativo" type="xs:boolean"/>
+      <xs:element name="siglaComissaoOndeTerminativo" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listaDeVotacoesDTO">
+    <xs:sequence>
+      <xs:element name="votacao" type="votacaoDTO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="votacaoDTO">
+    <xs:sequence>
+      <xs:element name="codigoVotacao" type="xs:long" minOccurs="0"/>
+      <xs:element name="codigoReuniao" type="xs:long" minOccurs="0"/>
+      <xs:element name="codigoItemPauta" type="xs:long" minOccurs="0"/>
+      <xs:element name="codigoMateria" type="xs:long" minOccurs="0"/>
+      <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+      <xs:element name="ordem" type="xs:int" minOccurs="0"/>
+      <xs:element name="codigoTipo" type="xs:long" minOccurs="0"/>
+      <xs:element name="tipo" type="xs:string" minOccurs="0"/>
+      <xs:element name="codigoVotacaoColegiado" type="xs:long" minOccurs="0"/>
+      <xs:element name="codigoColegiado" type="xs:long" minOccurs="0"/>
+      <xs:element name="encerrada" type="xs:boolean"/>
+      <xs:element name="reuniaoAbertaOuReaberta" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dadosBasicosDeRequerimentoDeCPIDTO">
+    <xs:sequence>
+      <xs:element name="numeroSedol" type="xs:string" minOccurs="0"/>
+      <xs:element name="identificadorNoComiss" type="idRequerimentoDeCPINoComissDTO" minOccurs="0"/>
+      <xs:element name="codColegiadoCPI" type="xs:long" minOccurs="0"/>
+      <xs:element name="codParlamentarAutor" type="xs:long" minOccurs="0"/>
+      <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+      <xs:element name="informacoesAdicionais" type="xs:string" minOccurs="0"/>
+      <xs:element name="idDocumentoSenado" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="idRequerimentoDeCPINoComissDTO">
+    <xs:sequence>
+      <xs:element name="numero" type="xs:long" minOccurs="0"/>
+      <xs:element name="ano" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listaReuniao">
+    <xs:sequence>
+      <xs:element name="reuniao" type="reuniaoTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="reuniaoTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="versao" type="xs:string" minOccurs="0"/>
+      <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+      <xs:element name="titulo" type="xs:string" minOccurs="0"/>
+      <xs:element name="colegiadoCriador" type="colegiadoTO" nillable="true" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="dataInicio" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dataInicioFormatadaComObsHorario" type="xs:string" minOccurs="0"/>
+      <xs:element name="observacaoHorario" type="xs:string" minOccurs="0"/>
+      <xs:element name="informacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="isExibirNoPortal" type="xs:boolean"/>
+      <xs:element name="confirmada" type="xs:boolean"/>
+      <xs:element name="realizada" type="xs:boolean"/>
+      <xs:element name="foiAgendadaAposTerSidoSuspensa" type="xs:boolean"/>
+      <xs:element name="codigoSituacao" type="xs:long" minOccurs="0"/>
+      <xs:element name="situacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="status" type="xs:string" minOccurs="0"/>
+      <xs:element name="descricaoDeNaoRealizacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="secreta" type="xs:boolean"/>
+      <xs:element name="dataSecreta" type="xs:string" minOccurs="0"/>
+      <xs:element name="observacaoSecreta" type="xs:string" minOccurs="0"/>
+      <xs:element name="local" type="xs:string" minOccurs="0"/>
+      <xs:element name="numReuniaoConjunta" type="xs:string" minOccurs="0"/>
+      <xs:element name="linkECidadania" type="xs:string" minOccurs="0"/>
+      <xs:element name="urlUltimaPautaSimplesPublicada" type="xs:string" minOccurs="0"/>
+      <xs:element name="urlUltimaPautaCheiaPublicada" type="xs:string" minOccurs="0"/>
+      <xs:element name="urlUltimoResultadoPublicado" type="xs:string" minOccurs="0"/>
+      <xs:element name="urlUltimaAtaPublicada" type="xs:string" minOccurs="0"/>
+      <xs:element name="urlUltimaAtaPublicadaDiario" type="xs:string" minOccurs="0"/>
+      <xs:element name="urlSumarioExecutivoMPV" type="xs:string" minOccurs="0"/>
+      <xs:element name="urlSumarioDosPareceres" type="xs:string" minOccurs="0"/>
+      <xs:element name="idUltimaPublicacaoPautaSimples" type="xs:string" minOccurs="0"/>
+      <xs:element name="idUltimaPublicacaoResultado" type="xs:string" minOccurs="0"/>
+      <xs:element name="tipoPresenca" type="xs:string" minOccurs="0"/>
+      <xs:element name="codigoReuniaoAnteriorSuspensa" type="xs:long" minOccurs="0"/>
+      <xs:element name="reuniaoDeContinuacao" type="reuniaoContinuacaoTO" minOccurs="0"/>
+      <xs:element name="continuacaoCancelada" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="tipo" type="tipoReuniaoTO" minOccurs="0"/>
+      <xs:element name="sessaoLegislativa" type="sessaoLegislativaTO" minOccurs="0"/>
+      <xs:element name="permitePresencaApp" type="xs:boolean"/>
+      <xs:element name="permiteVotacaoSemPresencaFisica" type="xs:boolean"/>
+      <xs:element name="possuiVotacaoSecreta" type="xs:boolean"/>
+      <xs:element name="presidente" type="parlamentarDTO" minOccurs="0"/>
+      <xs:element name="dataReuniao" type="dataReuniaoDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="colegiados" type="colegiadoTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="partes" type="parteReuniaoTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="videos" nillable="true" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+            <xs:element name="ordem" type="xs:int" minOccurs="0"/>
+            <xs:element name="url" type="xs:string" minOccurs="0"/>
+            <xs:element name="titulo" type="xs:string" minOccurs="0"/>
+            <xs:element name="dataHoraReuniao" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="reuniaoContinuacaoTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="tipo" type="xs:string" minOccurs="0"/>
+      <xs:element name="numeroReuniaoConjunta" type="xs:string" minOccurs="0"/>
+      <xs:element name="data" type="xs:string" minOccurs="0"/>
+      <xs:element name="hora" type="xs:string" minOccurs="0"/>
+      <xs:element name="evento" type="xs:string" minOccurs="0"/>
+      <xs:element name="local" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tipoReuniaoTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+      <xs:element name="sigla" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sessaoLegislativaTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="numeroLegislatura" type="xs:int"/>
+      <xs:element name="numero" type="xs:int"/>
+      <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+      <xs:element name="inicio" type="xs:date" minOccurs="0"/>
+      <xs:element name="fim" type="xs:date" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="colegiadoTO">
+    <xs:all>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="nome" type="xs:string" minOccurs="0"/>
+      <xs:element name="tipo" type="xs:string" minOccurs="0"/>
+      <xs:element name="sigla" type="xs:string" minOccurs="0"/>
+      <xs:element name="siglaCasa" type="xs:string" minOccurs="0"/>
+      <xs:element name="codigoTipoColegiado" type="xs:long" minOccurs="0"/>
+      <xs:element name="codigoTipo" type="xs:long" minOccurs="0"/>
+      <xs:element name="nomeTipoColegiado" type="xs:string" minOccurs="0"/>
+      <xs:element name="descricaoTipo" type="xs:string" minOccurs="0"/>
+      <xs:element name="materiasOriginadoras" minOccurs="0">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nomeFormatado" type="xs:string" minOccurs="0"/>
+                <xs:element name="sigla" type="xs:string" minOccurs="0"/>
+                <xs:element name="numero" type="xs:string" minOccurs="0"/>
+                <xs:element name="ano" type="xs:int" minOccurs="0"/>
+                <xs:element name="idProcesso" type="xs:long" minOccurs="0"/>
+                <xs:element name="codMateriaLegado" type="xs:long" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="isSubcomissao" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="codigoColegiadoPai" type="xs:long" minOccurs="0"/>
+      <xs:element name="composicaoPublica" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="publicoPortal" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="numeroReuniao" type="xs:string" minOccurs="0"/>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="parteReuniaoTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="nome" type="xs:string" minOccurs="0"/>
+      <xs:element name="codigoTipo" type="xs:long" minOccurs="0"/>
+      <xs:element name="descricaoTipo" type="xs:string" minOccurs="0"/>
+      <xs:element name="sequencial" type="xs:int"/>
+      <xs:element name="sequencialFormatado" type="xs:string" minOccurs="0"/>
+      <xs:element name="isDeliberativa" type="xs:boolean"/>
+      <xs:element name="finalidade" type="xs:string" minOccurs="0"/>
+      <xs:element name="itens" type="itemPautaTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="evento" type="eventoTO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="itemPautaTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="tipo" type="xs:string" minOccurs="0"/>
+      <xs:element name="ordem" type="xs:int" minOccurs="0"/>
+      <xs:element name="nome" type="xs:string" minOccurs="0"/>
+      <xs:element name="nomeFormatadoComOrdem" type="xs:string" minOccurs="0"/>
+      <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+      <xs:element name="autorItemPauta" type="autor" minOccurs="0"/>
+      <xs:element name="isTerminativo" type="xs:boolean"/>
+      <xs:element name="tipoPauta" type="xs:string" minOccurs="0"/>
+      <xs:element name="categoria" type="xs:string" minOccurs="0"/>
+      <xs:element name="classificacao" type="classificacao" minOccurs="0"/>
+      <xs:element name="relatorio" type="xs:string" minOccurs="0"/>
+      <xs:element name="siglaRelatorio" type="xs:string" minOccurs="0"/>
+      <xs:element name="observacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="observacaoRelatorio" type="xs:string" minOccurs="0"/>
+      <xs:element name="descricaoResultado" type="xs:string" minOccurs="0"/>
+      <xs:element name="siglaResultado" type="xs:string" minOccurs="0"/>
+      <xs:element name="observacaoResultado" type="xs:string" minOccurs="0"/>
+      <xs:element name="situacao" type="situacaoMateriaTO" minOccurs="0"/>
+      <xs:element name="ordemDeliberacao" type="xs:int" minOccurs="0"/>
+      <xs:element name="apreciado" type="xs:boolean"/>
+      <xs:element name="emDeliberacao" type="xs:boolean"/>
+      <xs:element name="revisado" type="xs:boolean"/>
+      <xs:element name="resultadoPublico" type="xs:boolean"/>
+      <xs:element name="dataInicio" type="xs:string" minOccurs="0"/>
+      <xs:element name="cabecalhoParecer" type="xs:string" minOccurs="0"/>
+      <xs:element name="estadoAtual" type="xs:string" minOccurs="0"/>
+      <xs:element name="dataHoraEstadoAtual" type="xs:string" minOccurs="0"/>
+      <xs:element name="dataResultado" type="xs:string" minOccurs="0"/>
+      <xs:element name="textosPauta" type="textoMateria" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="votacoes" type="votacaoTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="pediramVista" type="parlamentarDTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="anexados" type="itemPautaMateriaTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="doma" type="domaTO" minOccurs="0"/>
+      <xs:element name="requerimento" type="materiaNaoAutonomaTO" minOccurs="0"/>
+      <xs:element name="minuta" type="materiaNaoAutonomaTO" minOccurs="0"/>
+      <xs:element name="materiaNaoAutonoma" type="materiaNaoAutonomaTO" minOccurs="0"/>
+      <xs:element name="requerimentoCPI" type="requerimentoCPITO" minOccurs="0"/>
+      <xs:element name="resultado" type="resultadoItemPautaTO" minOccurs="0"/>
+      <xs:element name="possuiVotacaoSecreta" type="xs:boolean"/>
+      <xs:element name="urlDownload" type="xs:string" minOccurs="0"/>
+      <xs:element name="domaCriado" type="domaTO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="votacaoTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="codigoReuniao" type="xs:long" minOccurs="0"/>
+      <xs:element name="codigoItemPauta" type="xs:long" minOccurs="0"/>
+      <xs:element name="idDoma" type="xs:long" minOccurs="0"/>
+      <xs:element name="tipo" type="xs:string" minOccurs="0"/>
+      <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+      <xs:element name="ordem" type="xs:int" minOccurs="0"/>
+      <xs:element name="votacaoEmendas" type="votacaoEmendaTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="votacaoColegiados" type="votacaoColegiadoTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="votacaoEmBloco" type="votacaoEmBlocoTO" minOccurs="0"/>
+      <xs:element name="isVotacaoPrincipalBloco" type="xs:boolean"/>
+      <xs:element name="isVotacaoEmBloco" type="xs:boolean"/>
+      <xs:element name="isVotacaoItemPauta" type="xs:boolean"/>
+      <xs:element name="dataHora" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="votacaoEmendaTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="votacao" type="xs:long" minOccurs="0"/>
+      <xs:element name="idEmenda" type="xs:long" minOccurs="0"/>
+      <xs:element name="codigoEmenda" type="xs:long" minOccurs="0"/>
+      <xs:element name="dataApresentacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="numeroApresentacao" type="xs:long" minOccurs="0"/>
+      <xs:element name="codigoUnidadeApresentacao" type="xs:long" minOccurs="0"/>
+      <xs:element name="idProcesso" type="xs:long" minOccurs="0"/>
+      <xs:element name="autoria" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="votacaoColegiadoTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="codigoVotacao" type="xs:long" minOccurs="0"/>
+      <xs:element name="codigoColegiado" type="xs:long" minOccurs="0"/>
+      <xs:element name="autorPresente" type="xs:boolean"/>
+      <xs:element name="encerrada" type="xs:boolean"/>
+      <xs:element name="presidente" type="parlamentarDTO" minOccurs="0"/>
+      <xs:element name="isVotacaoSVE" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="votacaoEmBlocoTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="codigoParteReuniao" type="xs:long" minOccurs="0"/>
+      <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+      <xs:element name="codigoVotacaoPrincipal" type="xs:long" minOccurs="0"/>
+      <xs:element name="votacoes" type="votacaoTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="itemPautaMateriaTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="codigoItemPauta" type="xs:long" minOccurs="0"/>
+      <xs:element name="doma" type="domaTO" minOccurs="0"/>
+      <xs:element name="relatorio" type="xs:string" minOccurs="0"/>
+      <xs:element name="resultado" type="xs:string" minOccurs="0"/>
+      <xs:element name="principal" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="materiaNaoAutonomaTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="codigoTipo" type="xs:long" minOccurs="0"/>
+      <xs:element name="tipo" type="xs:string" minOccurs="0"/>
+      <xs:element name="nomeFormatado" type="xs:string" minOccurs="0"/>
+      <xs:element name="dataApresentacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="dataApreciacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="titulo" type="xs:string" minOccurs="0"/>
+      <xs:element name="ementa" type="xs:string" minOccurs="0"/>
+      <xs:element name="situacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="idEcmSenado" type="xs:string" minOccurs="0"/>
+      <xs:element name="urlDownload" type="xs:string" minOccurs="0"/>
+      <xs:element name="mimeType" type="xs:string" minOccurs="0"/>
+      <xs:element name="autoria" type="xs:string" minOccurs="0"/>
+      <xs:element name="documento" type="documentoTO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="documentoTO">
+    <xs:sequence>
+      <xs:element name="idEcmSenado" type="xs:string" minOccurs="0"/>
+      <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+      <xs:element name="nome" type="xs:string" minOccurs="0"/>
+      <xs:element name="mimeType" type="xs:string" minOccurs="0"/>
+      <xs:element name="linkDownload" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="requerimentoCPITO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="versao" type="xs:string" minOccurs="0"/>
+      <xs:element name="numero" type="xs:string" minOccurs="0"/>
+      <xs:element name="ano" type="xs:int" minOccurs="0"/>
+      <xs:element name="dataApresentacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="dataApreciacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="ementa" type="xs:string" minOccurs="0"/>
+      <xs:element name="numeroSedol" type="xs:string" minOccurs="0"/>
+      <xs:element name="idDoma" type="xs:long" minOccurs="0"/>
+      <xs:element name="uf" type="xs:string" minOccurs="0"/>
+      <xs:element name="tipoRequerimento" type="xs:string" minOccurs="0"/>
+      <xs:element name="assunto" type="xs:string" minOccurs="0"/>
+      <xs:element name="autoria" type="xs:string" minOccurs="0"/>
+      <xs:element name="autor" type="parlamentarDTO" minOccurs="0"/>
+      <xs:element name="colegiado" type="colegiadoTO" minOccurs="0"/>
+      <xs:element name="transferenciaDeSigilo" type="transferenciaDeSigiloTO" minOccurs="0"/>
+      <xs:element name="depoimento" type="depoimentoTO" minOccurs="0"/>
+      <xs:element name="tituloParaPauta" type="xs:string" minOccurs="0"/>
+      <xs:element name="textoParaPauta" type="xs:string" minOccurs="0"/>
+      <xs:element name="observacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="documento" type="documentoTO" minOccurs="0"/>
+      <xs:element name="anexos" type="documentoTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="situacao" type="xs:string" minOccurs="0"/>
+      <xs:element name="codigoSituacao" type="xs:long" minOccurs="0"/>
+      <xs:element name="requerimentosCorrelatos" type="requerimentoCPITO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="depoentes" type="depoenteCPITO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="documentosEnviados" nillable="true" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+              <xs:sequence>
+                  <xs:element name="codigo" type="xs:long" minOccurs="0" />
+                  <xs:element name="numero" type="xs:string" minOccurs="0" />
+                  <xs:element name="ano" type="xs:int" minOccurs="0" />
+                  <xs:element name="descricao" type="xs:string" minOccurs="0" />
+                  <xs:element name="dataExpedicao" type="xs:date" minOccurs="0" />
+                  <xs:element name="assunto" type="xs:string" minOccurs="0" />
+                  <xs:element name="ementa" type="xs:string" minOccurs="0" />
+                  <xs:element name="destinatario" type="correspondenteDTO" minOccurs="0"/>
+                  <xs:element name="requerimentosRespondidos" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                          <xs:sequence>
+                              <xs:element name="numero" type="xs:string" />
+                              <xs:element name="ano" type="xs:int" />
+                              <xs:element name="codigoTipo" type="xs:long" />
+                              <xs:element name="descricaoTipo" type="xs:string" />
+                              <xs:element name="urlDownload" type="xs:string" />
+                          </xs:sequence>
+                      </xs:complexType>
+                  </xs:element>
+                  <xs:element name="arquivos" type="arquivoDTO" minOccurs="0" maxOccurs="unbounded">
+                  </xs:element>
+              </xs:sequence>
+          </xs:complexType>
+      </xs:element>
+      <xs:element name="documentosRecebidos" nillable="true" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+        <xs:sequence>
+            <xs:element name="codigo" type="xs:long"  minOccurs="0"/>
+            <xs:element name="numero" type="xs:string"  minOccurs="0"/>
+            <xs:element name="descricao" type="xs:string"  minOccurs="0"/>
+            <xs:element name="dataRecebimento" type="xs:date"  minOccurs="0"/>
+            <xs:element name="assunto" type="xs:string"  minOccurs="0"/>
+            <xs:element name="tipoTransferenciaSigilo" type="xs:string" minOccurs="0" />
+            <xs:element name="dataEmissaoOrigem" type="xs:date" minOccurs="0" />
+            <xs:element name="numeroNaOrigem" type="xs:string" minOccurs="0" />
+            <xs:element name="ementa" type="xs:string" minOccurs="0" />
+            <xs:element name="numFolhas" type="xs:int" minOccurs="0" />
+            <xs:element name="numCaixaInicial" type="xs:int" minOccurs="0" />
+            <xs:element name="numCaixaFinal" type="xs:int" minOccurs="0" />
+            <xs:element name="remetente" type="correspondenteDTO" minOccurs="0"/>
+            <xs:element name="arquivos" type="arquivoDTO" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="referenciados" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+                        <xs:element name="numero" type="xs:string" minOccurs="0"/>
+                        <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="emResposta" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                    <xs:element name="codigo" type="xs:long" />
+                    <xs:element name="numero" type="xs:string" />
+                    <xs:element name="ano" type="xs:int" />
+                    <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="requerimentosRespondidos">
+                        <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="numero" type="xs:string" />
+                            <xs:element name="ano" type="xs:int" />
+                            <xs:element name="urlDownload" type="xs:string" />
+                        </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="midias" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="nome" type="xs:string" minOccurs="0"/>
+                        <xs:element name="numero" type="xs:string" minOccurs="0"/>
+                        <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="codigoConarq" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+    <xs:complexType name="arquivoDTO">
+        <xs:sequence>
+            <xs:element name="codigo" type="xs:long" />
+            <xs:element name="descricao" type="xs:string" minOccurs="0" />
+            <xs:element name="sigiloso" type="xs:boolean" minOccurs="0" />
+            <xs:element name="tipo" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="codigo" type="xs:long" />
+                        <xs:element name="descricao" type="xs:string" />
+                        <xs:element name="codigoConarq" type="xs:string" />
+                        <xs:element name="idTipoDoma" type="xs:long" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="documento" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="idEcmSenado" type="xs:string" />
+                        <xs:element name="mimeType" type="xs:string" />
+                        <xs:element name="linkDownload" type="xs:string" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+
+<xs:complexType name="correspondenteDTO">
+    <xs:sequence>
+        <xs:element name="cpf" type="xs:string" minOccurs="0"/>
+        <xs:element name="nome" type="xs:string" minOccurs="0"/>
+        <xs:element name="sexo" type="xs:string" minOccurs="0"/>
+        <xs:element name="paginaWebInstituicao" type="xs:string" minOccurs="0"/>
+        <xs:element name="poderEsferaInstituicao" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+</xs:complexType>
+  <xs:complexType name="transferenciaDeSigiloTO">
+    <xs:sequence>
+      <xs:element name="dataInicio" type="xs:string" minOccurs="0"/>
+      <xs:element name="dataFim" type="xs:string" minOccurs="0"/>
+      <xs:element name="tipos" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="tipoInvestigado" type="xs:string" minOccurs="0"/>
+      <xs:element name="pessoaInvestigada" type="pessoaCPITO" minOccurs="0"/>
+      <xs:element name="instituicaoInvestigada" type="instituicaoCPITO" minOccurs="0"/>
+      <xs:element name="observacao" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pessoaCPITO">
+    <xs:sequence>
+      <xs:element name="cpf" type="xs:string" minOccurs="0"/>
+      <xs:element name="rg" type="xs:string" minOccurs="0"/>
+      <xs:element name="nome" type="xs:string" minOccurs="0"/>
+      <xs:element name="nomeSimplificado" type="xs:string" minOccurs="0"/>
+      <xs:element name="sexo" type="xs:string" minOccurs="0"/>
+      <xs:element name="telefone" type="xs:string" minOccurs="0"/>
+      <xs:element name="fax" type="xs:string" minOccurs="0"/>
+      <xs:element name="endereco" type="enderecoTO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="enderecoTO">
+    <xs:sequence>
+      <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+      <xs:element name="cidade" type="xs:string" minOccurs="0"/>
+      <xs:element name="uf" type="xs:string" minOccurs="0"/>
+      <xs:element name="cep" type="xs:string" minOccurs="0"/>
+      <xs:element name="observacao" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="instituicaoCPITO">
+    <xs:sequence>
+      <xs:element name="nome" type="xs:string" minOccurs="0"/>
+      <xs:element name="sigla" type="xs:string" minOccurs="0"/>
+      <xs:element name="paginaWeb" type="xs:string" minOccurs="0"/>
+      <xs:element name="preposicao" type="xs:string" minOccurs="0"/>
+      <xs:element name="poderEsfera" type="xs:string" minOccurs="0"/>
+      <xs:element name="cnpj" type="xs:string" minOccurs="0"/>
+      <xs:element name="telefone" type="xs:string" minOccurs="0"/>
+      <xs:element name="fax" type="xs:string" minOccurs="0"/>
+      <xs:element name="endereco" type="enderecoTO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="depoimentoTO">
+    <xs:sequence>
+      <xs:element name="depoente" type="pessoaCPITO" minOccurs="0"/>
+      <xs:element name="observacao" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="depoenteCPITO">
+    <xs:sequence>
+      <xs:element name="tipo" type="xs:string" minOccurs="0"/>
+      <xs:element name="pessoaFisica" type="pessoaCPITO" minOccurs="0"/>
+      <xs:element name="pessoaJuridica" type="instituicaoCPITO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="resultadoItemPautaTO">
+    <xs:sequence>
+      <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+      <xs:element name="texto" type="xs:string" minOccurs="0"/>
+      <xs:element name="materia" type="materiaCriadaPorRequerimentoTO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="materiaCriadaPorRequerimentoTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="subtipo" type="xs:string" minOccurs="0"/>
+      <xs:element name="numero" type="xs:string" minOccurs="0"/>
+      <xs:element name="ano" type="xs:long" minOccurs="0"/>
+      <xs:element name="idDoma" type="xs:long" minOccurs="0"/>
+      <xs:element name="idProcesso" type="xs:long" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eventoTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="finalidade" type="xs:string" minOccurs="0"/>
+      <xs:element name="isPublicado" type="xs:boolean"/>
+      <xs:element name="isRealizado" type="xs:boolean"/>
+      <xs:element name="observacoes" type="xs:string" minOccurs="0"/>
+      <xs:element name="resultadoTexto" type="xs:string" minOccurs="0"/>
+      <xs:element name="resultadoObservacoes" type="xs:string" minOccurs="0"/>
+      <xs:element name="convidados" type="pessoaEventoTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="participantes" type="pessoaEventoTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="domasRelacionados" type="domaRelacionadoTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="anexos" type="anexoEventoTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pessoaEventoTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="ordem" type="xs:int" minOccurs="0"/>
+      <xs:element name="tratamento" type="xs:string" minOccurs="0"/>
+      <xs:element name="nome" type="xs:string" minOccurs="0"/>
+      <xs:element name="sexo" type="xs:string" minOccurs="0"/>
+      <xs:element name="cargo" type="xs:string" minOccurs="0"/>
+      <xs:element name="representanteDe" type="xs:string" minOccurs="0"/>
+      <xs:element name="requerimentosOitiva" type="requerimentoCPITO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="depoenteOitiva" type="depoenteCPITO" minOccurs="0"/>
+      <xs:element name="documentos" type="documentoTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="apresentacoes" type="documentoTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="codigoConvidado" type="xs:long" minOccurs="0"/>
+      <xs:element name="isDepoentePresente" type="xs:boolean"/>
+      <xs:element name="isPorVideoConferencia" type="xs:boolean"/>
+      <xs:element name="municipio" type="xs:string" minOccurs="0"/>
+      <xs:element name="local" type="xs:string" minOccurs="0"/>
+      <xs:element name="codigoSituacao" type="xs:long" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="domaRelacionadoTO">
+    <xs:sequence>
+      <xs:element name="finalidade" type="xs:string" minOccurs="0"/>
+      <xs:element name="descricaoFinalidade" type="xs:string" minOccurs="0"/>
+      <xs:element name="ordem" type="xs:int" minOccurs="0"/>
+      <xs:element name="doma" type="domaTO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="anexoEventoTO">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:long" minOccurs="0"/>
+      <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+      <xs:element name="tipo" type="xs:string" minOccurs="0"/>
+      <xs:element name="numOrdenacao" type="xs:int" minOccurs="0"/>
+      <xs:element name="isVisivelResultado" type="xs:boolean"/>
+      <xs:element name="documento" type="documentoTO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listaDocumentosDiversosPortal">
+    <xs:sequence>
+      <xs:element name="arquivos" type="listaArquivosPortal" minOccurs="0"/>
+      <xs:element name="pastas" type="listaPastasPortal" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listaArquivosPortal">
+    <xs:sequence>
+      <xs:element name="arquivo" type="arquivoPortalTO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="arquivoPortalTO">
+    <xs:sequence>
+      <xs:element name="codigoPagina" type="xs:long" minOccurs="0"/>
+      <xs:element name="nomeArquivo" type="xs:string" minOccurs="0"/>
+      <xs:element name="url" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listaPastasPortal">
+    <xs:sequence>
+      <xs:element name="pasta" type="pastaArquivoPortalTO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pastaArquivoPortalTO">
+    <xs:sequence>
+      <xs:element name="arquivos" type="listaArquivosPortal" minOccurs="0"/>
+      <xs:element name="nomePasta" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="sexo">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="M"/>
+      <xs:enumeration value="F"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="UrlDocServicoSubstituto" type="xs:string"/>
+  <xs:element name="UrlServicoSubstituto" type="xs:string"/>
+  <xs:element name="Versao" type="xs:string"/>
+  <xs:element name="VersaoServico" type="xs:string"/>
+  <xs:element name="VersaoServicoSubstituto" type="xs:string"/>
+</xs:schema>
